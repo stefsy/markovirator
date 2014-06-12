@@ -13,15 +13,15 @@ import nltk
 import timeit
 import random
 
-def createDict(fpath):
+def file_to_text(fpath):
 	f = open(fpath,'r')
 	text = []
 	for line in f: 
-		# text.extend( line.rstrip("\n").rstrip("\r").strip('\"').split(" ") )
-		# nltk for the save
 		text.extend(nltk.tokenize.wordpunct_tokenize(line))
  	text = filter(None,text) #remove blanks
+ 	return text 
 
+def create_dict(text):
 	d = defaultdict(list)
 	for i in range(0,len(text)): 
 		try:
@@ -33,7 +33,9 @@ def createDict(fpath):
 			pass
 	return d
 
-def mergeTexts(listLookups):
+def merge_texts(listLookups):
+	"""Takes advantage of defaultdict's nice handling of new keys to create
+		merged data"""
 	mergedLookup = defaultdict(list)
 	for lookup in listLookups:
 		for k, v in lookup.items():
@@ -41,7 +43,7 @@ def mergeTexts(listLookups):
 	return mergedLookup
 
 # flesh out later
-def checkDict(d):
+def check_dict(d):
 	kError = 0
 	k = []
 	for k in d.keys():
@@ -50,13 +52,13 @@ def checkDict(d):
 			k.append(k)
 	print kError
 
-def writeNew(chain,nWords):
-	#pick the most common key as the first two words
+def write_new(chain,nWords):
+	"""Generates new pseudo random text of length nWords"""
+
 	key = max(chain.iterkeys(), key=(lambda key: len(chain[key])))
 	val = random.choice(chain[key])
 	wc = 3
 	newText = key[0] + " " + key[1] + " " + val
-
 	#keep adding new words, if key not found, select random word
 	#could be cleaned up, type checking feels awkward
 	while wc < nWords:
@@ -78,15 +80,15 @@ if __name__ == '__main__':
 
 	lookups = []
 	for i in range(1,len(sys.argv)-1):
-		lookups.append(createDict(sys.argv[i]))
+		lookups.append(create_dict(file_to_text(sys.argv[i])))
 
 	# 1, the setup required to run timeit on custom defined funtions is too much
 	# 2, createDict() takes about 2.1s to run on a 595kb text file
 	# print(timeit.timeit("createDict('holmes.txt')", setup="from __main__ import createDict",number=50))	
 	
 	#write 200 words of the new mashup
-	mashup = mergeTexts(lookups)
-	print writeNew(mashup,100)
+	mashup = merge_texts(lookups)
+	print write_new(mashup,200)
 
 	# what % of all keys do the two texts have in common? 
 	# # the higher this is, the better the mashup's going to be
