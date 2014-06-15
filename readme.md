@@ -15,11 +15,11 @@ Holmes vs. Mystery at Styles 0.103376868349
 Holmes vs. Grimms' Tales 0.0933396949937
 Mystery at Styles vs. Grimms' 0.0829907246313
 
-#To Do 
+##To Do 
 
-convert to a markovirator class with ff methods
+convert to a markovirator class
 
-#Methods
+##Methods
 
 1. Similarity Index
 2. Key Uniqueness Index
