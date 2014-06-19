@@ -31,3 +31,6 @@ convert to a markovirator class
 --
 Hi Atsi, testing to see if I can edit this and submit a pull request.
 -Gelli 
+
+Update:
+So I can edit this file on my local repository and since I am a collaborator on this project I can push to master (your remote repo)
