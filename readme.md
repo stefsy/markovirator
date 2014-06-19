@@ -25,3 +25,9 @@ convert to a markovirator class
 2. Key Uniqueness Index
 3. Write new text -- done
 4. Mashup texts -- done
+
+
+
+--
+Hi Atsi, testing to see if I can edit this and submit a pull request.
+-Gelli 
